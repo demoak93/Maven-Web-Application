@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maven-web-application
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+
+  selector:
+    matchLabels:
+      app: maven-web-application
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  minReadySeconds: 30
+
+  template:
+    metadata:
+      labels:
+        app: maven-web-application
+
+    spec:
+      containers:
+      - name: maven-web-application
+
+        image: demoak93/maven-web-application:latest
+
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 8080
