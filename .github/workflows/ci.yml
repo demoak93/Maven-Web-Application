@@ -23,5 +23,10 @@ jobs:
         run: mvn clean package
       - name: List packaged file
         run: ls -l target
+      - name: Build Docker Image
+        run: docker build -t maven-web-application:latest .
+      - name: Verify Images
+        run: docker images
+      
       
         
