@@ -48,7 +48,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Update deployment image
         run: |
-        sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/maven-web-application:${{ github.sha }}|" k8s/deployment.yaml
-        
-      
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/maven-web-application:${{ github.sha }}
+          sed -i "s|^.*image:.*|        image: ${IMAGE}|" k8s/deployment.yaml
+      - name: Commit changes
+        run: |
+          git add k8s/deployment.yaml
+          git diff --cached --quiet || git commit -m "Update image to ${{ github.sha }} [skip ci]"
+     - name: Push changes
+       run: |
+         git push
       
