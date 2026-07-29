@@ -7,5 +7,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Hello
-        run: echo "Hello From Github Actions"
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+      - name: Display Current Directory
+        run: pwd
+      - name: List Repository Files
+        run: ls -la
