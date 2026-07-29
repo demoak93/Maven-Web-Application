@@ -9,12 +9,6 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
-      - name: Display Current Directory
-        run: pwd
-      - name: List Repository Files
-        run: ls -la
-      - name: check java version before install
-        run: java -version
       - name: Setup java
         uses: actions/setup-java@v4
         with:
@@ -25,4 +19,9 @@ jobs:
         run: java -version
       - name: Verify Maven version
         run: mvn -version
+      - name: Build Maven Project
+        run: mvn clean package
+      - name: List packaged file
+        run: ls -l target
+      
         
