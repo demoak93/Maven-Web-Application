@@ -27,7 +27,7 @@ spec:
       containers:
       - name: maven-web-application
 
-        image: demoak93/maven-web-application:latest
+        image: demoak93/maven-web-application:24f438e4869061c925ab56969fc129cd4fdd4ad9
 
         imagePullPolicy: Always
 
