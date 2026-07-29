@@ -54,7 +54,7 @@ jobs:
         run: |
           git add k8s/deployment.yaml
           git diff --cached --quiet || git commit -m "Update image to ${{ github.sha }} [skip ci]"
-     - name: Push changes
-       run: |
-         git push
+      - name: Push changes
+        run: |
+          git push
       
