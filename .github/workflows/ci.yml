@@ -32,5 +32,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      
+      - name: Tag docker image
+        run: |
+          docker tag maven-web-application:latest ${{ secrets.DOCKER_USERNAME }}/maven-web-application:latest
+          docker tag maven-web-application:latest ${{ secrets.DOCKER_USERNAME }}/maven-web-application:${{ github.sha }}
+      - name: Verify tags
+        run: docker images
+      - name: Push latest image to docker hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/maven-web-application:latest
+      - name: Push commit SHA image to dockerhub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/maven-web-application:${{ github.sha }}
         
+      
+      
