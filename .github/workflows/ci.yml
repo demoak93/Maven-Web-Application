@@ -42,6 +42,13 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/maven-web-application:latest
       - name: Push commit SHA image to dockerhub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/maven-web-application:${{ github.sha }}
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Update deployment image
+        run: |
+        sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/maven-web-application:${{ github.sha }}|" k8s/deployment.yaml
         
       
       
