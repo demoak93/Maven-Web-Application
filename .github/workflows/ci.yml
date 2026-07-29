@@ -58,8 +58,8 @@ jobs:
           git diff --cached --quiet || git commit -m "Update image to ${{ github.sha }} [skip ci]"
       - name: Configure Git Authentication
         run: |
-          "git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git remote set-url origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
       - name: Push changes
         run: |
-          git push
+          git push origin master
       
